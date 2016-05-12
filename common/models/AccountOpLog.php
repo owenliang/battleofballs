@@ -29,7 +29,7 @@ class AccountOpLog extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'account_from', 'account_to', 'date', 'click_time'], 'required'],
+            // [['id', 'account_from', 'account_to', 'date', 'click_time'], 'required'],
             [['id', 'date', 'click_time'], 'integer'],
             [['account_from', 'account_to'], 'string', 'max' => 512]
         ];

@@ -31,7 +31,7 @@ class AccountDailyStatus extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'username', 'date', 'score', 'last_score_time', 'click_count', 'last_click_time'], 'required'],
+            // [['id', 'username', 'date', 'score', 'last_score_time', 'click_count', 'last_click_time'], 'required'],
             [['id', 'date', 'score', 'last_score_time', 'click_count', 'last_click_time'], 'integer'],
             [['username'], 'string', 'max' => 256]
         ];
@@ -51,5 +51,36 @@ class AccountDailyStatus extends \yii\db\ActiveRecord
             'click_count' => 'Click Count',
             'last_click_time' => 'Last Click Time',
         ];
+    }
+    
+    /**
+     * 查询用户某一天的积分信息
+     * @param unknown $username
+     * @param unknown $date
+     * @return
+     */
+    public static function findDailyStatus($username, $date) {
+    	return self::find()->asArray(true)->where(['username' => $username, 'date' => $date])->one();
+    }
+    
+    /**
+     * 创建用户某一天的积分信息
+     * @param unknown $username
+     * @param unknown $date
+     * @return
+     */
+    public static function createDailyStatus($username, $date) {
+    	$dailyStatus = new AccountDailyStatus();
+    	$dailyStatus->username = $username;
+    	$dailyStatus->date = $date;
+    	$dailyStatus->score = 0;
+    	$dailyStatus->last_score_time = 0;
+    	$dailyStatus->click_count = 0;
+    	$dailyStatus->last_click_time = 0;
+    	$ret = $dailyStatus->save();
+    	if (empty($ret)) {
+    		return false;
+    	}
+    	return $dailyStatus->toArray();
     }
 }

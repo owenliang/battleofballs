@@ -20,5 +20,6 @@ final class HttpResponse {
 			'msg' => $errMsg,
 			'data' => $data,
 		];
+		header("Access-Control-Allow-Origin: *");
 	}
 }

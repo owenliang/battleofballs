@@ -30,7 +30,7 @@ class AccountBasicInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'username', 'share_url', 'history_score', 'history_click', 'last_login'], 'required'],
+            // [['id', 'username', 'share_url', 'history_score', 'history_click', 'last_login'], 'required'],
             [['id', 'history_score', 'history_click', 'last_login'], 'integer'],
             [['username'], 'string', 'max' => 256],
             [['share_url'], 'string', 'max' => 512]
@@ -50,5 +50,30 @@ class AccountBasicInfo extends \yii\db\ActiveRecord
             'history_click' => 'History Click',
             'last_login' => 'Last Login',
         ];
+    }
+    
+    /**
+     * 根据用户名查找账号
+     * @param unknown $username
+     * @return
+     */
+    public static function findAccount($username) {
+    	return self::find()->asArray(true)->where(['username' => $username])->one();
+    }
+    
+    /**
+     * 创建账号
+     * @param unknown $username
+     * @param unknown $accountInfo
+     * @return
+     */
+    public static function createAccount($username, $accountInfo) {
+    	$account = new AccountBasicInfo();
+    	$account->username = $username;
+    	$account->share_url = $accountInfo['shareUrl'];
+    	$account->history_score = 0;
+    	$account->history_click = 0;
+    	$account->last_login = time();
+    	return $account->save();
     }
 }
