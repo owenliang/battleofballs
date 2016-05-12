@@ -83,4 +83,17 @@ class AccountDailyStatus extends \yii\db\ActiveRecord
     	}
     	return $dailyStatus->toArray();
     }
+    
+    /**
+     * 查询某天尚需点击的其他用户列表
+     * @param unknown $username
+     * @param unknown $date
+     * @param unknown $scoreLimit
+     * @param unknown $countLimit
+     * @return
+     */
+    public static function listDailyStatus($username, $date, $scoreLimit, $countLimit) {
+    	return self::find()->asArray(true)->where(['date' => $date])->andWhere(['<=', 'score', $scoreLimit])->
+    		andWhere(['!=', 'username', $username])->orderBy('click_count desc, last_click_time desc')->limit($countLimit)->all();
+    }
 }

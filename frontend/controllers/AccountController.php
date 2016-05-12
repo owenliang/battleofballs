@@ -34,11 +34,11 @@ class AccountController extends \yii\web\Controller
     	} else { // 已存在，更新分享链接 和 最近登陆时间
     		AccountBasicInfo::updateAll(['last_login' => time(), 'share_url' => $shareUrl], ['username' => $username]);
     	}
-        
+
     	\Yii::$app->response->cookies->add(new \yii\web\Cookie([
     			'name' => 'battleofballs_username', 
     			'value' => $username, 
-    			'expire' => time() + 86400 * 90, 
+    			'expire' => time() + \Yii::$app->params['Account']['sessionExpire'], 
     	]));
     	
     	return HttpResponse::packReturn(0, 'success', [

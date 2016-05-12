@@ -48,4 +48,35 @@ class AccountOpLog extends \yii\db\ActiveRecord
             'click_time' => 'Click Time',
         ];
     }
+    
+    /**
+     * 获取某个用户某天的所有点击日志
+     * @param unknown $accountFrom
+     * @param unknown $date
+     * @param unknown $accountToArr
+     */
+    public static function listOpLog($accountFrom, $date, $accountToArr) {
+    	return self::find()->asArray(true)->where(['account_from' => $accountFrom, 'date' => $date, 'account_to' => $accountToArr])->all();
+    }
+    
+    /**
+     * 创建一条点击日志
+     * @param unknown $accountFrom
+     * @param unknown $accountTo
+     * @param unknown $date
+     * @return
+     */
+    public static function createOpLog($accountFrom, $accountTo, $date) {
+    	$opLog = new AccountOpLog();
+    	$opLog->account_from = $accountFrom;
+    	$opLog->account_to = $accountTo;
+    	$opLog->date = $date;
+    	$opLog->ack = 0;
+    	$opLog->click_time = time();
+    	$ret = $opLog->save();
+    	if (empty($ret)) {
+    		return false;
+    	}
+    	return $opLog->toArray();
+    } 
 }
