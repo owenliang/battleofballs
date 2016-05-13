@@ -54,9 +54,9 @@ class TaskController extends \yii\web\Controller
         		'username' => $dailyStatus['username'], 
         		'date' => $date, 
         		'score' => $dailyStatus['score'], 
-        		'lastScoreTime' => $dailyStatus['last_score_time'],
+        		'lastScoreTime' => date('Y-m-d i:H:s', $dailyStatus['last_score_time']),
         		'clickCount' => $dailyStatus['click_count'],
-        		'lastClickTime' => $dailyStatus['last_click_time'], 
+        		'lastClickTime' => date('Y-m-d i:H:s', $dailyStatus['last_click_time']), 
         		'historyScore' => $account['history_score'], 
         		'historyClick' => $account['history_click'],
         ]);
@@ -104,9 +104,9 @@ class TaskController extends \yii\web\Controller
     				'username' => $status['username'], 
     				'date' => $date, 
     				'score' => $status['score'], 
-    				'lastScoreTime' => $status['last_score_time'], 
+    				'lastScoreTime' => date('Y-m-d i:H:s', $status['last_score_time']), 
     				'clickCount' => $status['click_count'],
-    				'lastClickTime' => $status['last_click_time'],
+    				'lastClickTime' => date('Y-m-d i:H:s', $status['last_click_time']),
     				'enabled' => isset($opMap[$status['username']]) ? false : true
     		];
     	}
