@@ -167,8 +167,8 @@ class TaskController extends \yii\web\Controller
     		return HttpResponse::packReturn(ErrorCode::ERR_COMMON_USER_NOT_LOGIN, '用户未登录', []);
     	}
     	
-    	$username = \Yii::$app->request->get('username');
-    	$date = \Yii::$app->request->get('date');
+    	$username = \Yii::$app->request->post('username');
+    	$date = \Yii::$app->request->post('date');
     	if (empty($username) || empty($date)) {
     		return HttpResponse::packReturn(ErrorCode::ERR_COMMON_PARAM_ERROR, '参数缺失', []);
     	}
