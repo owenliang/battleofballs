@@ -3,9 +3,9 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=10.36.253.127;port=6184;dbname=battleofballs',
-            'username' => 'uQkITdi6184',
-            'password' => 'P1PiDX7eZWdyuWfO1',
+            'dsn' => 'mysql:host=localhost;port=3306;dbname=battleofballs',
+            'username' => 'root',
+            'password' => 'root',
             'charset' => 'utf8',
         ],
 		'mailer' => [
