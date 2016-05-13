@@ -22,6 +22,8 @@ class AccountController extends \yii\web\Controller
     		return HttpResponse::packReturn(ErrorCode::ERR_COMMON_PARAM_ERROR, '', []);
     	}
     	
+    	$username = htmlspecialchars($username);
+    	
     	$account = AccountBasicInfo::findAccount($username);
     	if (empty($account)) { // 不存在，则创建账号
     		$accountInfo = [
