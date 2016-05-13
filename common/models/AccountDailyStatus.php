@@ -93,7 +93,7 @@ class AccountDailyStatus extends \yii\db\ActiveRecord
      * @return
      */
     public static function listDailyStatus($username, $date, $scoreLimit, $countLimit) {
-    	return self::find()->asArray(true)->where(['date' => $date])->andWhere(['<=', 'score', $scoreLimit])->
+    	return self::find()->asArray(true)->where(['date' => $date])->andWhere(['<', 'score', $scoreLimit])->
     		andWhere(['!=', 'username', $username])->orderBy('click_count desc, last_click_time desc')->limit($countLimit)->all();
     }
 }
